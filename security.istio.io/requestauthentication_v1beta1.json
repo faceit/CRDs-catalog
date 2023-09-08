@@ -56,24 +56,6 @@
               "jwksUri": {
                 "type": "string"
               },
-              "outputClaimToHeaders": {
-                "description": "This field specifies a list of operations to copy the claim to HTTP headers on a successfully verified token.",
-                "items": {
-                  "properties": {
-                    "claim": {
-                      "description": "The name of the claim to be copied from.",
-                      "type": "string"
-                    },
-                    "header": {
-                      "description": "The name of the header to be created.",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "type": "array"
-              },
               "outputPayloadToHeader": {
                 "type": "string"
               }
@@ -84,7 +66,7 @@
           "type": "array"
         },
         "selector": {
-          "description": "The selector determines the workloads to apply the RequestAuthentication on.",
+          "description": "Optional.",
           "properties": {
             "matchLabels": {
               "additionalProperties": {

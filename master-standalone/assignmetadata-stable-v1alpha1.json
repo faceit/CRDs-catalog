@@ -1,5 +1,5 @@
 {
-  "description": "Assign is the Schema for the assign API.",
+  "description": "AssignMetadata is the Schema for the assignmetadata API.",
   "properties": {
     "apiVersion": {
       "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
@@ -20,49 +20,19 @@
       "additionalProperties": false
     },
     "spec": {
-      "description": "AssignSpec defines the desired state of Assign.",
+      "description": "AssignMetadataSpec defines the desired state of AssignMetadata.",
       "properties": {
-        "applyTo": {
-          "description": "ApplyTo lists the specific groups, versions and kinds a mutation will be applied to. This is necessary because every mutation implies part of an object schema and object schemas are associated with specific GVKs.",
-          "items": {
-            "description": "ApplyTo determines what GVKs items the mutation should apply to. Globs are not allowed.",
-            "properties": {
-              "groups": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "kinds": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "versions": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "type": "object",
-            "additionalProperties": false
-          },
-          "type": "array"
-        },
         "location": {
-          "description": "Location describes the path to be mutated, for example: `spec.containers[name: main]`.",
           "type": "string"
         },
         "match": {
-          "description": "Match allows the user to limit which resources get mutated. Individual match criteria are AND-ed together. An undefined match criteria matches everything.",
+          "description": "Match selects objects to apply mutations to.",
           "properties": {
             "excludedNamespaces": {
               "description": "ExcludedNamespaces is a list of namespace names. If defined, a constraint only applies to resources not in a listed namespace. ExcludedNamespaces also supports a prefix or suffix based glob.  For example, `excludedNamespaces: [kube-*]` matches both `kube-system` and `kube-public`, and `excludedNamespaces: [*-system]` matches both `kube-system` and `gatekeeper-system`.",
               "items": {
                 "description": "A string that supports globbing at its front or end. Ex: \"kube-*\" will match \"kube-system\" or \"kube-public\", \"*-system\" will match \"kube-system\" or \"gatekeeper-system\".  The asterisk is required for wildcard matching.",
-                "pattern": "^(\\*|\\*-)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\*|-\\*)?$",
+                "pattern": "^(\\*|\\*-)?[a-z0-9]([-a-z0-9]*[a-z0-9])?$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\*|-\\*)?$",
                 "type": "string"
               },
               "type": "array"
@@ -136,7 +106,7 @@
             },
             "name": {
               "description": "Name is the name of an object.  If defined, it will match against objects with the specified name.  Name also supports a prefix or suffix glob.  For example, `name: pod-*` would match both `pod-a` and `pod-b`, and `name: *-pod` would match both `a-pod` and `b-pod`.",
-              "pattern": "^(\\*|\\*-)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\*|-\\*)?$",
+              "pattern": "^(\\*|\\*-)?[a-z0-9]([-a-z0-9]*[a-z0-9])?$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\*|-\\*)?$",
               "type": "string"
             },
             "namespaceSelector": {
@@ -187,7 +157,7 @@
               "description": "Namespaces is a list of namespace names. If defined, a constraint only applies to resources in a listed namespace.  Namespaces also supports a prefix or suffix based glob.  For example, `namespaces: [kube-*]` matches both `kube-system` and `kube-public`, and `namespaces: [*-system]` matches both `kube-system` and `gatekeeper-system`.",
               "items": {
                 "description": "A string that supports globbing at its front or end. Ex: \"kube-*\" will match \"kube-system\" or \"kube-public\", \"*-system\" will match \"kube-system\" or \"gatekeeper-system\".  The asterisk is required for wildcard matching.",
-                "pattern": "^(\\*|\\*-)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\*|-\\*)?$",
+                "pattern": "^(\\*|\\*-)?[a-z0-9]([-a-z0-9]*[a-z0-9])?$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\*|-\\*)?$",
                 "type": "string"
               },
               "type": "array"
@@ -195,22 +165,12 @@
             "scope": {
               "description": "Scope determines if cluster-scoped and/or namespaced-scoped resources are matched.  Accepts `*`, `Cluster`, or `Namespaced`. (defaults to `*`)",
               "type": "string"
-            },
-            "source": {
-              "description": "Source determines whether generated or original resources are matched. Accepts `Generated`|`Original`|`All` (defaults to `All`). A value of `Generated` will only match generated resources, while `Original` will only match regular resources.",
-              "enum": [
-                "All",
-                "Generated",
-                "Original"
-              ],
-              "type": "string"
             }
           },
           "type": "object",
           "additionalProperties": false
         },
         "parameters": {
-          "description": "Parameters define the behavior of the mutator.",
           "properties": {
             "assign": {
               "description": "Assign.value holds the value to be assigned",
@@ -267,27 +227,6 @@
               },
               "type": "object",
               "additionalProperties": false
-            },
-            "pathTests": {
-              "items": {
-                "description": "PathTest allows the user to customize how the mutation works if parent paths are missing. It traverses the list in order. All sub paths are tested against the provided condition, if the test fails, the mutation is not applied. All `subPath` entries must be a prefix of `location`. Any glob characters will take on the same value as was used to expand the matching glob in `location`. \n Available Tests: * MustExist    - the path must exist or do not mutate * MustNotExist - the path must not exist or do not mutate.",
-                "properties": {
-                  "condition": {
-                    "description": "Condition describes whether the path either MustExist or MustNotExist in the original object",
-                    "enum": [
-                      "MustExist",
-                      "MustNotExist"
-                    ],
-                    "type": "string"
-                  },
-                  "subPath": {
-                    "type": "string"
-                  }
-                },
-                "type": "object",
-                "additionalProperties": false
-              },
-              "type": "array"
             }
           },
           "type": "object",
@@ -298,9 +237,10 @@
       "additionalProperties": false
     },
     "status": {
-      "description": "AssignStatus defines the observed state of Assign.",
+      "description": "AssignMetadataStatus defines the observed state of AssignMetadata.",
       "properties": {
         "byPod": {
+          "description": "INSERT ADDITIONAL STATUS FIELD - define observed state of cluster Important: Run \"make\" to regenerate code after modifying this file",
           "items": {
             "description": "MutatorPodStatusStatus defines the observed state of MutatorPodStatus.",
             "properties": {

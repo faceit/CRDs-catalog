@@ -1,0 +1,272 @@
+{
+  "properties": {
+    "spec": {
+      "properties": {
+        "config": {
+          "description": "HAProxy global configuration",
+          "properties": {
+            "chroot": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "cpu_maps": {
+              "items": {
+                "properties": {
+                  "cpu_set": {
+                    "type": "string"
+                  },
+                  "process": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "process",
+                  "cpu_set"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
+            },
+            "daemon": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "external_check": {
+              "type": "boolean"
+            },
+            "group": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "hard_stop_after": {
+              "type": "integer"
+            },
+            "log_send_hostname": {
+              "properties": {
+                "enabled": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "param": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "lua_loads": {
+              "items": {
+                "properties": {
+                  "file": {
+                    "pattern": "^[^\\s]+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
+            },
+            "master-worker": {
+              "type": "boolean"
+            },
+            "maxconn": {
+              "type": "integer"
+            },
+            "nbproc": {
+              "type": "integer"
+            },
+            "nbthread": {
+              "type": "integer"
+            },
+            "pidfile": {
+              "type": "string"
+            },
+            "runtime_apis": {
+              "items": {
+                "properties": {
+                  "address": {
+                    "pattern": "^[^\\s]+$",
+                    "type": "string"
+                  },
+                  "exposeFdListeners": {
+                    "type": "boolean"
+                  },
+                  "level": {
+                    "enum": [
+                      "user",
+                      "operator",
+                      "admin"
+                    ],
+                    "type": "string"
+                  },
+                  "mode": {
+                    "pattern": "^[^\\s]+$",
+                    "type": "string"
+                  },
+                  "process": {
+                    "pattern": "^[^\\s]+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "address"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
+            },
+            "server_state_base": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "ssl_default_bind_ciphers": {
+              "type": "string"
+            },
+            "ssl_default_bind_ciphersuites": {
+              "type": "string"
+            },
+            "ssl_default_bind_options": {
+              "type": "string"
+            },
+            "ssl_default_server_ciphers": {
+              "type": "string"
+            },
+            "ssl_default_server_ciphersuites": {
+              "type": "string"
+            },
+            "ssl_default_server_options": {
+              "type": "string"
+            },
+            "ssl_mode_async": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "stats_timeout": {
+              "type": "integer"
+            },
+            "tune_ssl_default_dh_param": {
+              "type": "integer"
+            },
+            "user": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            }
+          },
+          "title": "Global",
+          "type": "object",
+          "additionalProperties": false
+        },
+        "log_targets": {
+          "items": {
+            "properties": {
+              "address": {
+                "pattern": "^[^\\s]+$",
+                "type": "string"
+              },
+              "facility": {
+                "enum": [
+                  "kern",
+                  "user",
+                  "mail",
+                  "daemon",
+                  "auth",
+                  "syslog",
+                  "lpr",
+                  "news",
+                  "uucp",
+                  "cron",
+                  "auth2",
+                  "ftp",
+                  "ntp",
+                  "audit",
+                  "alert",
+                  "cron2",
+                  "local0",
+                  "local1",
+                  "local2",
+                  "local3",
+                  "local4",
+                  "local5",
+                  "local6",
+                  "local7"
+                ],
+                "type": "string"
+              },
+              "format": {
+                "enum": [
+                  "rfc3164",
+                  "rfc5424",
+                  "short",
+                  "raw"
+                ],
+                "type": "string"
+              },
+              "index": {
+                "nullable": true,
+                "type": "integer"
+              },
+              "length": {
+                "type": "integer"
+              },
+              "level": {
+                "enum": [
+                  "emerg",
+                  "alert",
+                  "crit",
+                  "err",
+                  "warning",
+                  "notice",
+                  "info",
+                  "debug"
+                ],
+                "type": "string"
+              },
+              "minlevel": {
+                "enum": [
+                  "emerg",
+                  "alert",
+                  "crit",
+                  "err",
+                  "warning",
+                  "notice",
+                  "info",
+                  "debug"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "address",
+              "facility"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "type": "object"
+}

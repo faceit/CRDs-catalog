@@ -1,0 +1,1020 @@
+{
+  "properties": {
+    "spec": {
+      "properties": {
+        "config": {
+          "description": "HAProxy defaults configuration",
+          "properties": {
+            "abortonclose": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "adv_check": {
+              "enum": [
+                "ssl-hello-chk",
+                "smtpchk",
+                "ldap-check",
+                "mysql-check",
+                "pgsql-check",
+                "tcp-check",
+                "redis-check",
+                "httpchk"
+              ],
+              "type": "string"
+            },
+            "allbackups": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "balance": {
+              "properties": {
+                "algorithm": {
+                  "enum": [
+                    "roundrobin",
+                    "static-rr",
+                    "leastconn",
+                    "first",
+                    "source",
+                    "uri",
+                    "url_param",
+                    "hdr",
+                    "random",
+                    "rdp-cookie"
+                  ],
+                  "type": "string"
+                },
+                "hdr_name": {
+                  "type": "string"
+                },
+                "hdr_use_domain_only": {
+                  "type": "boolean"
+                },
+                "random_draws": {
+                  "type": "integer"
+                },
+                "rdp_cookie_name": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "uri_depth": {
+                  "type": "integer"
+                },
+                "uri_len": {
+                  "type": "integer"
+                },
+                "uri_path_only": {
+                  "type": "boolean"
+                },
+                "uri_whole": {
+                  "type": "boolean"
+                },
+                "url_param": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "url_param_check_post": {
+                  "type": "integer"
+                },
+                "url_param_max_wait": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "algorithm"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "bind_process": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "check_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "clflog": {
+              "type": "boolean"
+            },
+            "client_fin_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "client_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "clitcpka": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "connect_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "contstats": {
+              "enum": [
+                "enabled"
+              ],
+              "type": "string"
+            },
+            "cookie": {
+              "properties": {
+                "domain": {
+                  "items": {
+                    "properties": {
+                      "value": {
+                        "pattern": "^[^\\s]+$",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "type": "array"
+                },
+                "dynamic": {
+                  "type": "boolean"
+                },
+                "httponly": {
+                  "type": "boolean"
+                },
+                "indirect": {
+                  "type": "boolean"
+                },
+                "maxidle": {
+                  "type": "integer"
+                },
+                "maxlife": {
+                  "type": "integer"
+                },
+                "name": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "nocache": {
+                  "type": "boolean"
+                },
+                "postonly": {
+                  "type": "boolean"
+                },
+                "preserve": {
+                  "type": "boolean"
+                },
+                "secure": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "enum": [
+                    "rewrite",
+                    "insert",
+                    "prefix"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "default_backend": {
+              "pattern": "^[A-Za-z0-9-_.:]+$",
+              "type": "string"
+            },
+            "default_server": {
+              "properties": {
+                "address": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "agent-addr": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "agent-check": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "agent-inter": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "agent-port": {
+                  "maximum": 65535,
+                  "minimum": 1,
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "agent-send": {
+                  "type": "string"
+                },
+                "allow_0rtt": {
+                  "type": "boolean"
+                },
+                "alpn": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "backup": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "ca_file": {
+                  "type": "string"
+                },
+                "check": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "check-send-proxy": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "check-sni": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "check-ssl": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "check_alpn": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "check_proto": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "check_via_socks4": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "ciphers": {
+                  "type": "string"
+                },
+                "ciphersuites": {
+                  "type": "string"
+                },
+                "cookie": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "crl_file": {
+                  "type": "string"
+                },
+                "disabled": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "downinter": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "enabled": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "error_limit": {
+                  "type": "integer"
+                },
+                "fall": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "fastinter": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "force_sslv3": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "force_tlsv10": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "force_tlsv11": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "force_tlsv12": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "force_tlsv13": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "health_check_port": {
+                  "maximum": 65535,
+                  "minimum": 1,
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "init-addr": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "inter": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "log_proto": {
+                  "enum": [
+                    "legacy",
+                    "octet-count"
+                  ],
+                  "type": "string"
+                },
+                "max_reuse": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "maxconn": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "maxqueue": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "minconn": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "name": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "namespace": {
+                  "type": "string"
+                },
+                "no_sslv3": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "no_tlsv10": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "no_tlsv11": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "no_tlsv12": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "no_tlsv13": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "no_verifyhost": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "npn": {
+                  "type": "string"
+                },
+                "observe": {
+                  "enum": [
+                    "layer4",
+                    "layer7"
+                  ],
+                  "type": "string"
+                },
+                "on-error": {
+                  "enum": [
+                    "fastinter",
+                    "fail-check",
+                    "sudden-death",
+                    "mark-down"
+                  ],
+                  "type": "string"
+                },
+                "on-marked-down": {
+                  "enum": [
+                    "shutdown-sessions"
+                  ],
+                  "type": "string"
+                },
+                "on-marked-up": {
+                  "enum": [
+                    "shutdown-backup-sessions"
+                  ],
+                  "type": "string"
+                },
+                "pool_low_conn": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "pool_max_conn": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "pool_purge_delay": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "port": {
+                  "maximum": 65535,
+                  "minimum": 1,
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "proto": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "proxy-v2-options": {
+                  "items": {
+                    "enum": [
+                      "ssl",
+                      "cert-cn",
+                      "ssl-cipher",
+                      "cert-sig",
+                      "cert-key",
+                      "authority",
+                      "crc32c",
+                      "unique-id"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "redir": {
+                  "type": "string"
+                },
+                "resolve-net": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "resolve-prefer": {
+                  "enum": [
+                    "ipv4",
+                    "ipv6"
+                  ],
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "resolve_opts": {
+                  "pattern": "^[^,\\s][^\\,]*[^,\\s]*$",
+                  "type": "string"
+                },
+                "resolvers": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "rise": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "send-proxy": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "send-proxy-v2": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "send_proxy_v2_ssl": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "send_proxy_v2_ssl_cn": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "slowstart": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "sni": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "socks4": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "ssl": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "ssl_certificate": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "ssl_max_ver": {
+                  "enum": [
+                    "SSLv3",
+                    "TLSv1.0",
+                    "TLSv1.1",
+                    "TLSv1.2",
+                    "TLSv1.3"
+                  ],
+                  "type": "string"
+                },
+                "ssl_min_ver": {
+                  "enum": [
+                    "SSLv3",
+                    "TLSv1.0",
+                    "TLSv1.1",
+                    "TLSv1.2",
+                    "TLSv1.3"
+                  ],
+                  "type": "string"
+                },
+                "ssl_reuse": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "stick": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "tcp_ut": {
+                  "type": "integer"
+                },
+                "tfo": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "tls_tickets": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "track": {
+                  "type": "string"
+                },
+                "verify": {
+                  "enum": [
+                    "none",
+                    "required"
+                  ],
+                  "type": "string"
+                },
+                "verifyhost": {
+                  "type": "string"
+                },
+                "weight": {
+                  "nullable": true,
+                  "type": "integer"
+                }
+              },
+              "title": "Default Server",
+              "type": "object",
+              "additionalProperties": false
+            },
+            "dontlognull": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "error_files": {
+              "items": {
+                "properties": {
+                  "code": {
+                    "enum": [
+                      200,
+                      400,
+                      403,
+                      405,
+                      408,
+                      425,
+                      429,
+                      500,
+                      502,
+                      503,
+                      504
+                    ],
+                    "type": "integer"
+                  },
+                  "file": {
+                    "type": "string"
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
+            },
+            "external_check": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "external_check_command": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "external_check_path": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "forwardfor": {
+              "properties": {
+                "enabled": {
+                  "enum": [
+                    "enabled"
+                  ],
+                  "type": "string"
+                },
+                "except": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "header": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "ifnone": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "http-buffer-request": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "http-check": {
+              "properties": {
+                "exclamation_mark": {
+                  "type": "boolean"
+                },
+                "match": {
+                  "enum": [
+                    "status",
+                    "rstatus",
+                    "string",
+                    "rstring"
+                  ],
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "pattern": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "disable-on-404",
+                    "expect",
+                    "send-state"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "http-use-htx": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "http_connection_mode": {
+              "enum": [
+                "httpclose",
+                "http-server-close",
+                "http-keep-alive"
+              ],
+              "type": "string"
+            },
+            "http_keep_alive_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "http_pretend_keepalive": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "http_request_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "http_reuse": {
+              "enum": [
+                "aggressive",
+                "always",
+                "never",
+                "safe"
+              ],
+              "type": "string"
+            },
+            "httpchk_params": {
+              "properties": {
+                "method": {
+                  "enum": [
+                    "HEAD",
+                    "PUT",
+                    "POST",
+                    "GET",
+                    "TRACE",
+                    "PATCH"
+                  ],
+                  "type": "string"
+                },
+                "uri": {
+                  "pattern": "^[^ ]*$",
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "httplog": {
+              "type": "boolean"
+            },
+            "log_format": {
+              "type": "string"
+            },
+            "log_format_sd": {
+              "type": "string"
+            },
+            "log_separate_errors": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "log_tag": {
+              "pattern": "^[^\\s]+$",
+              "type": "string"
+            },
+            "logasap": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            },
+            "maxconn": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "mode": {
+              "enum": [
+                "tcp",
+                "http"
+              ],
+              "type": "string"
+            },
+            "mysql_check_params": {
+              "properties": {
+                "client_version": {
+                  "enum": [
+                    "pre-41",
+                    "post-41"
+                  ],
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "pgsql_check_params": {
+              "properties": {
+                "username": {
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "queue_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "redispatch": {
+              "properties": {
+                "enabled": {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "string"
+                },
+                "interval": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "retries": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "server_fin_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "server_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "smtpchk_params": {
+              "properties": {
+                "domain": {
+                  "type": "string"
+                },
+                "hello": {
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "stats_options": {
+              "properties": {
+                "stats_enable": {
+                  "type": "boolean"
+                },
+                "stats_hide_version": {
+                  "type": "boolean"
+                },
+                "stats_maxconn": {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "stats_refresh_delay": {
+                  "nullable": true,
+                  "type": "integer"
+                },
+                "stats_show_desc": {
+                  "nullable": true,
+                  "type": "string"
+                },
+                "stats_show_legends": {
+                  "type": "boolean"
+                },
+                "stats_show_node_name": {
+                  "nullable": true,
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                },
+                "stats_uri_prefix": {
+                  "pattern": "^[^\\s]+$",
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "tcplog": {
+              "type": "boolean"
+            },
+            "tunnel_timeout": {
+              "nullable": true,
+              "type": "integer"
+            },
+            "unique_id_format": {
+              "type": "string"
+            },
+            "unique_id_header": {
+              "type": "string"
+            }
+          },
+          "title": "Defaults",
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "config"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "type": "object"
+}
