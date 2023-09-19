@@ -4,7 +4,6 @@
       "description": "Extend the functionality provided by the Istio proxy through WebAssembly filters. See more details at: https://istio.io/docs/reference/config/proxy_extensions/wasm-plugin.html",
       "properties": {
         "imagePullPolicy": {
-          "description": "The pull behaviour to be applied when fetching an OCI image.",
           "enum": [
             "UNSPECIFIED_POLICY",
             "IfNotPresent",
@@ -15,6 +14,39 @@
         "imagePullSecret": {
           "description": "Credentials to use for OCI image pulling.",
           "type": "string"
+        },
+        "match": {
+          "description": "Specifies the criteria to determine which traffic is passed to WasmPlugin.",
+          "items": {
+            "properties": {
+              "mode": {
+                "description": "Criteria for selecting traffic by their direction.",
+                "enum": [
+                  "UNDEFINED",
+                  "CLIENT",
+                  "SERVER",
+                  "CLIENT_AND_SERVER"
+                ],
+                "type": "string"
+              },
+              "ports": {
+                "description": "Criteria for selecting traffic by their destination port.",
+                "items": {
+                  "properties": {
+                    "number": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "type": "array"
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
         },
         "phase": {
           "description": "Determines where in the filter chain this `WasmPlugin` is to be injected.",

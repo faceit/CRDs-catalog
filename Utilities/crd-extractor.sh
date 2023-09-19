@@ -33,7 +33,7 @@ TMP_CRD_DIR=$HOME/.datree/crds
 mkdir -p $TMP_CRD_DIR
 
 # Create final schemas directory
-SCHEMAS_DIR=$HOME/.datree/crdSchemas
+SCHEMAS_DIR=./
 mkdir -p $SCHEMAS_DIR
 cd $SCHEMAS_DIR
 
